@@ -1,0 +1,3 @@
+local speedButton = createButton("Set Speed (x2)", 190, function()
+    setSpeed(2)
+end)

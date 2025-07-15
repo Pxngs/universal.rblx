@@ -1,0 +1,6 @@
+local scriptHubFrame = Instance.new("ScrollingFrame")
+scriptHubFrame.Size = UDim2.new(0, 360, 0, 150)
+scriptHubFrame.Position = UDim2.new(0, 20, 0, 430)
+scriptHubFrame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+scriptHubFrame.Parent = mainFrame
+scriptHubFrame.CanvasSize = UDim2.new(0, 0, 0, 200)

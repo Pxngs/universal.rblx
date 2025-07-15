@@ -1,0 +1,157 @@
+-- Universal Roblox Exploit Script with GUI for Delta Executor (Mobile-Compatible)
+-- Compiled from skidded sources (ScriptBlox, kingexploits.com, GitHub, r/ROBLOXExploiting)
+-- Updated with loadstrings for Pxngs/universal.rblx
+
+-- Loadstring to fetch external scripts
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Pxngs/universal.rblx/main/scripts/external_scripts.lua"))()
+
+-- Initialize Main ScreenGui
+local gui = Instance.new("ScreenGui")
+gui.Name = "ExploitGUI"
+gui.Parent = game.Players.LocalPlayer.PlayerGui
+gui.ResetOnSpawn = false
+
+-- Create Main Frame
+local mainFrame = Instance.new("Frame")
+mainFrame.Size = UDim2.new(0, 400, 0, 600)
+mainFrame.Position = UDim2.new(0.5, -200, 0.5, -300)
+mainFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+mainFrame.Parent = gui
+
+-- Create Title Label
+local titleLabel = Instance.new("TextLabel")
+titleLabel.Size = UDim2.new(0, 400, 0, 50)
+titleLabel.Position = UDim2.new(0, 0, 0, 0)
+titleLabel.Text = "Ultimate Exploit 2025"
+titleLabel.Font = Enum.Font.GothamBold
+titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+titleLabel.TextSize = 24
+titleLabel.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+titleLabel.Parent = mainFrame
+
+-- Create Buttons for Features
+local function createButton(name, positionY, callback)
+    local button = Instance.new("TextButton")
+    button.Size = UDim2.new(0, 100, 0, 50)
+    button.Position = UDim2.new(0, 20, 0, positionY)
+    button.Text = name
+    button.Font = Enum.Font.Gotham
+    button.TextColor3 = Color3.fromRGB(255, 255, 255)
+    button.TextSize = 18
+    button.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+    button.Parent = mainFrame
+    button.MouseButton1Click:Connect(callback)
+    return button
+end
+
+-- Aimbot Toggle
+local aimbotActive = false
+local aimbotButton = createButton("Aimbot: OFF", 70, function()
+    aimbotActive = not aimbotActive
+    aimbotButton.Text = aimbotActive and "Aimbot: ON" or "Aimbot: OFF"
+    if aimbotActive then
+        enableAimbot()
+    else
+        print("Aimbot deactivated")
+    end
+end)
+
+-- ESP Toggle
+local espActive = false
+local espButton = createButton("ESP: OFF", 130, function()
+    espActive = not espActive
+    espButton.Text = espActive and "ESP: ON" or "ESP: OFF"
+    if espActive then
+        enableESP()
+    else
+        print("ESP deactivated")
+    end
+end)
+
+-- Speed Hack Button
+local speedButton = createButton("Set Speed (x2)", 190, function()
+    setSpeed(2)
+end)
+
+-- Teleport TextBox
+local teleportBox = Instance.new("TextBox")
+teleportBox.Size = UDim2.new(0, 200, 0, 50)
+teleportBox.Position = UDim2.new(0, 130, 0, 250)
+teleportBox.Text = "Enter coords (x,y,z)"
+teleportBox.Font = Enum.Font.Gotham
+teleportBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+teleportBox.TextSize = 18
+teleportBox.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+teleportBox.Parent = mainFrame
+
+local teleportButton = createButton("Teleport", 250, function()
+    local coords = teleportBox.Text:split(",")
+    if #coords == 3 then
+        teleport(tonumber(coords[1]), tonumber(coords[2]), tonumber(coords[3]))
+    else
+        print("Invalid coordinates")
+    end
+end)
+
+-- Infinite Resources Button
+local resourcesButton = createButton("Farm Resources", 310, function()
+    infiniteResources()
+end)
+
+-- Anti-Ban Toggle
+local antiBanActive = false
+local antiBanButton = createButton("Anti-Ban: OFF", 370, function()
+    antiBanActive = not antiBanActive
+    antiBanButton.Text = antiBanActive and "Anti-Ban: ON" or "Anti-Ban: OFF"
+    if antiBanActive then
+        enableAntiBan()
+    else
+        print("Anti-Ban deactivated")
+    end
+end)
+
+-- Script Hub Frame
+local scriptHubFrame = Instance.new("ScrollingFrame")
+scriptHubFrame.Size = UDim2.new(0, 360, 0, 150)
+scriptHubFrame.Position = UDim2.new(0, 20, 0, 430)
+scriptHubFrame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+scriptHubFrame.Parent = mainFrame
+scriptHubFrame.CanvasSize = UDim2.new(0, 0, 0, 200)
+
+-- Add Script Hub Buttons
+local function addScriptButton(name, scriptUrl)
+    local button = Instance.new("TextButton")
+    button.Size = UDim2.new(0, 340, 0, 40)
+    button.Position = UDim2.new(0, 10, 0, #scriptHubFrame:GetChildren() * 50)
+    button.Text = name
+    button.Font = Enum.Font.Gotham
+    button.TextColor3 = Color3.fromRGB(255, 255, 255)
+    button.TextSize = 16
+    button.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+    button.Parent = scriptHubFrame
+    button.MouseButton1Click:Connect(function()
+        loadstring(game:HttpGet(scriptUrl))()
+        print("Executing script: " .. name)
+    end)
+end
+
+addScriptButton("Blox Fruits Auto Farm", "https://raw.githubusercontent.com/Pxngs/universal.rblx/main/scripts/blox_fruits.lua")
+addScriptButton("Pet Simulator X", "https://raw.githubusercontent.com/Pxngs/universal.rblx/main/scripts/pet_sim_x.lua")
+addScriptButton("The Strongest Battlegrounds", "https://raw.githubusercontent.com/Pxngs/universal.rblx/main/scripts/tsb.lua")
+
+-- Anti-Cheat Bypass
+local function bypassByfron()
+    -- Skidded Byfron bypass from romeo1653/Roblox-Anti-Cheat-Bypass
+    local old; old = hookmetamethod(game, "__namecall", function(self, ...)
+        local args = {...}
+        if getnamecallmethod() == "FireServer" and args[1] == "AntiCheatCheck" then
+            return
+        end
+        return old(self, ...)
+    end)
+    print("Byfron bypass activated")
+end
+bypassByfron()
+
+-- Print startup message
+print("Ultimate Exploit 2025 loaded. srry for this corny ass name")

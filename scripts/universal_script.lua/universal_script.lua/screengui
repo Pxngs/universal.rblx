@@ -1,0 +1,4 @@
+local gui = Instance.new("ScreenGui")
+gui.Name = "ExploitGUI"
+gui.Parent = game.Players.LocalPlayer.PlayerGui
+gui.ResetOnSpawn = false

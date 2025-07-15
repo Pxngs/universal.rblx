@@ -1,0 +1,35 @@
+local aimbotButtonTSB = createTSBButton("Aimbot: OFF", 120, function()
+    aimbotActiveTSB = not aimbotActiveTSB
+    aimbotButtonTSB.Text = aimbotActiveTSB and "Aimbot: ON" or "Aimbot: OFF"
+    if aimbotActiveTSB then
+        local connection
+        connection = RunService.RenderStepped:Connect(function()
+            if not aimbotActiveTSB then
+                connection:Disconnect()
+                table.insert(connections, nil)
+                return
+            end
+            local Camera = Workspace.CurrentCamera
+            local closestPlayer = nil
+            local shortestDistance = math.huge
+            for _, player in pairs(Players:GetPlayers()) do
+                if player ~= LocalPlayer and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+                    local torso = player.Character.HumanoidRootPart
+                    local screenPoint = Camera:WorldToScreenPoint(torso.Position)
+                    local distance = (Vector2.new(UserInputService:GetMouseLocation().X, UserInputService:GetMouseLocation().Y) - Vector2.new(screenPoint.X, screenPoint.Y)).Magnitude
+                    if distance < shortestDistance then
+                        closestPlayer = player
+                        shortestDistance = distance
+                    end
+                end
+            end
+            if closestPlayer and closestPlayer.Character and closestPlayer.Character:FindFirstChild("HumanoidRootPart") then
+                Camera.CFrame = CFrame.new(Camera.CFrame.Position, closestPlayer.Character.HumanoidRootPart.Position)
+            end
+        end)
+        table.insert(connections, connection)
+        print("TSB Aimbot activated")
+    else
+        print("TSB Aimbot deactivated")
+    end
+end)

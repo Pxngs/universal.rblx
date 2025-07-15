@@ -1,0 +1,28 @@
+local invisibilityButton = createTSBButton("Invisibility: OFF", 300, function()
+    invisibilityActive = not invisibilityActive
+    invisibilityButton.Text = invisibilityActive and "Invisibility: ON" or "Invisibility: OFF"
+    if invisibilityActive then
+        if LocalPlayer.Character then
+            for _, part in pairs(LocalPlayer.Character:GetDescendants()) do
+                if part:IsA("BasePart") then
+                    part.Transparency = 1
+                elseif part:IsA("Decal") then
+                    part.Transparency = 1
+                end
+            end
+            LocalPlayer.Character.HumanoidRootPart.Anchored = false
+            print("Invisibility activated")
+        end
+    else
+        if LocalPlayer.Character then
+            for _, part in pairs(LocalPlayer.Character:GetDescendants()) do
+                if part:IsA("BasePart") then
+                    part.Transparency = 0
+                elseif part:IsA("Decal") then
+                    part.Transparency = 0
+                end
+            end
+            print("Invisibility deactivated")
+        end
+    end
+end)

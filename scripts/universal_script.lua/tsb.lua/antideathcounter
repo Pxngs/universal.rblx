@@ -1,0 +1,17 @@
+local antiDeathCounterButton = createTSBButton("Anti-Death Counter: OFF", 360, function()
+    antiDeathCounterActive = not antiDeathCounterActive
+    antiDeathCounterButton.Text = antiDeathCounterActive and "Anti-Death Counter: ON" or "Anti-Death Counter: OFF"
+    if antiDeathCounterActive then
+        local old; old = hookmetamethod(game, "__namecall", function(self, ...)
+            local args = {...}
+            if antiDeathCounterActive and getnamecallmethod() == "FireServer" and args[1] == "DeathCounter" then
+                return
+            end
+            return old(self, ...)
+        end)
+        table.insert(connections, old)
+        print("Anti-Death Counter activated")
+    else
+        print("Anti-Death Counter deactivated")
+    end
+end)

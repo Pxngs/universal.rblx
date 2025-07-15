@@ -1,0 +1,11 @@
+function infiniteResources()
+    local LocalPlayer = game:GetService("Players").LocalPlayer
+    if LocalPlayer:FindFirstChild("leaderstats") then
+        for _, stat in pairs(LocalPlayer.leaderstats:GetChildren()) do
+            if stat:IsA("IntValue") or stat:IsA("NumberValue") then
+                stat.Value = stat.Value + 1000000
+            end
+        end
+    end
+    print("Farming resources")
+end

@@ -1,0 +1,17 @@
+local noCooldownButton = createTSBButton("No Cooldown: OFF", 180, function()
+    noCooldownActive = not noCooldownActive
+    noCooldownButton.Text = noCooldownActive and "No Cooldown: ON" or "No Cooldown: OFF"
+    if noCooldownActive then
+        local old; old = hookmetamethod(game, "__namecall", function(self, ...)
+            local args = {...}
+            if noCooldownActive and getnamecallmethod() == "FireServer" and (args[1] == "CooldownCheck" or args[1] == "SkillCooldown") then
+                return true
+            end
+            return old(self, ...)
+        end)
+        table.insert(connections, old)
+        print("No Cooldown activated")
+    else
+        print("No Cooldown deactivated")
+    end
+end)

@@ -1,0 +1,29 @@
+function autoFarmBloxFruits()
+    local LocalPlayer = game:GetService("Players").LocalPlayer
+    local Workspace = game:GetService("Workspace")
+    local function getClosestChest()
+        local closestChest = nil
+        local shortestDistance = math.huge
+        for _, chest in pairs(Workspace:GetDescendants()) do
+            if chest.Name == "Chest" and chest:IsA("Model") then
+                local distance = (LocalPlayer.Character.HumanoidRootPart.Position - chest:GetPivot().Position).Magnitude
+                if distance < shortestDistance then
+                    closestChest = chest
+                    shortestDistance = distance
+                end
+            end
+        end
+        return closestChest
+    end
+    while true do
+        local chest = getClosestChest()
+        if chest then
+            LocalPlayer.Character.HumanoidRootPart.CFrame = chest:GetPivot()
+            wait(0.5)
+            fireclickdetector(chest:FindFirstChildOfClass("ClickDetector"))
+        end
+        wait(1)
+    end
+    print("Blox Fruits auto farm running")
+end
+autoFarmBloxFruits()

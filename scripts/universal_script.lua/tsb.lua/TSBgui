@@ -1,0 +1,35 @@
+local tsbGui = Instance.new("ScreenGui")
+tsbGui.Name = "TSBExploitGUI"
+tsbGui.Parent = LocalPlayer.PlayerGui
+tsbGui.ResetOnSpawn = false
+tsbGui.Enabled = false
+
+local tsbFrame = Instance.new("Frame")
+tsbFrame.Size = UDim2.new(0, 300, 0, 500)
+tsbFrame.Position = UDim2.new(0.5, -150, 0.5, -250)
+tsbFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+tsbFrame.Parent = tsbGui
+
+local tsbTitle = Instance.new("TextLabel")
+tsbTitle.Size = UDim2.new(0, 300, 0, 50)
+tsbTitle.Position = UDim2.new(0, 0, 0, 0)
+tsbTitle.Text = "TSB VexonHub"
+tsbTitle.Font = Enum.Font.GothamBold
+tsbTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+tsbTitle.TextSize = 24
+tsbTitle.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+tsbTitle.Parent = tsbFrame
+
+local function createTSBButton(name, positionY, callback)
+    local button = Instance.new("TextButton")
+    button.Size = UDim2.new(0, 260, 0, 50)
+    button.Position = UDim2.new(0, 20, 0, positionY)
+    button.Text = name
+    button.Font = Enum.Font.Gotham
+    button.TextColor3 = Color3.fromRGB(255, 255, 255)
+    button.TextSize = 18
+    button.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+    button.Parent = tsbFrame
+    button.MouseButton1Click:Connect(callback)
+    return button
+end

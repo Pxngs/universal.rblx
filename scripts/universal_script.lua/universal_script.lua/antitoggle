@@ -1,0 +1,10 @@
+local antiBanActive = false
+local antiBanButton = createButton("Anti-Ban: OFF", 370, function()
+    antiBanActive = not antiBanActive
+    antiBanButton.Text = antiBanActive and "Anti-Ban: ON" or "Anti-Ban: OFF"
+    if antiBanActive then
+        enableAntiBan()
+    else
+        print("Anti-Ban deactivated")
+    end
+end)

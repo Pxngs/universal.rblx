@@ -1,0 +1,18 @@
+
+local services
+local success, result = pcall(function()
+    return loadstring(game:HttpGet("https://raw.githubusercontent.com/Pxngs/universal.rblx/main/scripts/services.lua"))()
+end)
+if success and result then
+    services = result
+else
+    warn("Failed to load services.lua. Using local fallback. Check GitHub: https://github.com/Pxngs/universal.rblx")
+    services = {
+        Players = game:GetService("Players"),
+        LocalPlayer = game:GetService("Players").LocalPlayer,
+        Workspace = game:GetService("Workspace"),
+        RunService = game:GetService("RunService"),
+        ReplicatedStorage = game:GetService("ReplicatedStorage"),
+        UserInputService = game:GetService("UserInputService")
+    }
+end

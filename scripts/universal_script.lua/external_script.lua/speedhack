@@ -1,0 +1,7 @@
+function setSpeed(multiplier)
+    local LocalPlayer = game:GetService("Players").LocalPlayer
+    if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("Humanoid") then
+        LocalPlayer.Character.Humanoid.WalkSpeed = 16 * multiplier
+    end
+    print("Speed set to x" .. multiplier)
+end

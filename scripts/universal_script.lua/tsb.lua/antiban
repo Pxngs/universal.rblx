@@ -1,0 +1,24 @@
+local antiBanButtonTSB = createTSBButton("Anti-Ban: OFF", 240, function()
+    antiBanActiveTSB = not antiBanActiveTSB
+    antiBanButtonTSB.Text = antiBanActiveTSB and "Anti-Ban: ON" or "Anti-Ban: OFF"
+    if antiBanActiveTSB then
+        local oldIndex; oldIndex = hookmetamethod(game, "__index", function(self, key)
+            if antiBanActiveTSB and (key == "Kick" or key == "Ban") then
+                return function() end
+            end
+            return oldIndex(self, key)
+        end)
+        local oldNamecall; oldNamecall = hookmetamethod(game, "__namecall", function(self, ...)
+            local args = {...}
+            if antiBanActiveTSB and getnamecallmethod() == "FireServer" and (args[1] == "AntiCheatCheck" or args[1] == "ExploitDetect") then
+                return
+            end
+            return oldNamecall(self, ...)
+        end)
+        table.insert(connections, oldIndex)
+        table.insert(connections, oldNamecall)
+        print("TSB Anti-Ban activated")
+    else
+        print("TSB Anti-Ban deactivated")
+    end
+end)

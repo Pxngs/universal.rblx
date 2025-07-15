@@ -1,0 +1,18 @@
+local function addScriptButton(name, scriptUrl)
+    local button = Instance.new("TextButton")
+    button.Size = UDim2.new(0, 340, 0, 40)
+    button.Position = UDim2.new(0, 10, 0, #scriptHubFrame:GetChildren() * 50)
+    button.Text = name
+    button.Font = Enum.Font.Gotham
+    button.TextColor3 = Color3.fromRGB(255, 255, 255)
+    button.TextSize = 16
+    button.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+    button.Parent = scriptHubFrame
+    button.MouseButton1Click:Connect(function()
+        loadstring(game:HttpGet(scriptUrl))()
+        print("Executing script: " .. name)
+    end)
+end
+
+addScriptButton("Blox Fruits Auto Farm", "https://raw.githubusercontent.com/<your-github-username>/RobloxExploit2025/main/scripts/blox_fruits.lua")
+addScriptButton("Pet Simulator X", "https://raw.githubusercontent.com/<your-github-username>/RobloxExploit2025/main/scripts/pet_sim_x.lua")

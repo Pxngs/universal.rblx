@@ -1,0 +1,12 @@
+local function cleanup()
+    for _, connection in pairs(connections) do
+        if connection then
+            connection:Disconnect()
+        end
+    end
+    connections = {}
+    if tsbGui then
+        tsbGui:Destroy()
+    end
+    print("Cleaned up TSB script resources")
+end

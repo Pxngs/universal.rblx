@@ -1,0 +1,25 @@
+local killAuraButton = createTSBButton("Kill Aura: OFF", 60, function()
+    killAuraActive = not killAuraActive
+    killAuraButton.Text = killAuraActive and "Kill Aura: ON" or "Kill Aura: OFF"
+    if killAuraActive then
+        spawn(function()
+            local m1Remote = getM1Remote()
+            while killAuraActive and LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart") do
+                for _, player in pairs(Players:GetPlayers()) do
+                    if player ~= LocalPlayer and player.Character and player.Character:FindFirstChild("Humanoid") and player.Character:FindFirstChild("HumanoidRootPart") then
+                        local distance = (LocalPlayer.Character.HumanoidRootPart.Position - player.Character.HumanoidRootPart.Position).Magnitude
+                        if distance < 20 then
+                            LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(player.Character.HumanoidRootPart.Position + Vector3.new(0, 0, -3))
+                            pcall(function() m1Remote:FireServer(player.Character.Humanoid) end)
+                            wait(0.1 + math.random(0, 0.05)) -- Random delay to avoid detection
+                        end
+                    end
+                end
+                wait(0.15) -- Slightly slower for mobile performance
+            end
+        end)
+        print("Kill Aura activated")
+    else
+        print("Kill Aura deactivated")
+    end
+end)

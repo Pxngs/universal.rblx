@@ -1,0 +1,26 @@
+local autoVoidKillingButton = createTSBButton("Auto Void Killing: OFF", 480, function()
+    autoVoidKillingActive = not autoVoidKillingActive
+    autoVoidKillingButton.Text = autoVoidKillingActive and "Auto Void Killing: ON" or "Auto Void Killing: OFF"
+    if autoVoidKillingActive then
+        spawn(function()
+            local m1Remote = getM1Remote()
+            while autoVoidKillingActive and LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart") do
+                for _, player in pairs(Players:GetPlayers()) do
+                    if player ~= LocalPlayer and player.Character and player.Character:FindFirstChild("HumanoidRootPart") and player.Character:FindFirstChild("Humanoid") then
+                        local distance = (LocalPlayer.Character.HumanoidRootPart.Position - player.Character.HumanoidRootPart.Position).Magnitude
+                        if distance < 20 then
+                            pcall(function() m1Remote:FireServer(player.Character.Humanoid) end) -- Deal damage first
+                            wait(0.05) -- Ensure server registers hit
+                            player.Character.HumanoidRootPart.CFrame = CFrame.new(0, -1000, 0) -- Teleport to void
+                            wait(0.15 + math.random(0, 0.05)) -- Random delay to avoid detection
+                        end
+                    end
+                end
+                wait(0.25) -- Slower loop for mobile performance
+            end
+        end)
+        print("Auto Void Killing activated")
+    else
+        print("Auto Void Killing deactivated")
+    end
+end)

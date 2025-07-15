@@ -1,0 +1,12 @@
+local function bypassByfron()
+    -- Skidded Byfron bypass from romeo1653/Roblox-Anti-Cheat-Bypass
+    local old; old = hookmetamethod(game, "__namecall", function(self, ...)
+        local args = {...}
+        if getnamecallmethod() == "FireServer" and args[1] == "AntiCheatCheck" then
+            return
+        end
+        return old(self, ...)
+    end)
+    print("Byfron bypass activated")
+end
+bypassByfron()

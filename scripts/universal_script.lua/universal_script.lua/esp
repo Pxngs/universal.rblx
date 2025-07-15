@@ -1,0 +1,10 @@
+local espActive = false
+local espButton = createButton("ESP: OFF", 130, function()
+    espActive = not espActive
+    espButton.Text = espActive and "ESP: ON" or "ESP: OFF"
+    if espActive then
+        enableESP()
+    else
+        print("ESP deactivated")
+    end
+end)

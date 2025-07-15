@@ -1,0 +1,17 @@
+local antiSaitamaButton = createTSBButton("Anti-Saitama: OFF", 420, function()
+    antiSaitamaActive = not antiSaitamaActive
+    antiSaitamaButton.Text = antiSaitamaActive and "Anti-Saitama: ON" or "Anti-Saitama: OFF"
+    if antiSaitamaActive then
+        local old; old = hookmetamethod(game, "__namecall", function(self, ...)
+            local args = {...}
+            if antiSaitamaActive and getnamecallmethod() == "FireServer" and (args[1] == "TableFlip" or args[1] == "SeriousPunch" or args[1] == "OmnidirectionalPunch") then
+                return
+            end
+            return old(self, ...)
+        end)
+        table.insert(connections, old)
+        print("Anti-Saitama Moves activated")
+    else
+        print("Anti-Saitama Moves deactivated")
+    end
+end)

@@ -1,0 +1,11 @@
+local function getM1Remote()
+    local possibleRemotes = {"M1", "Attack", "BasicAttack", "Punch", "Combat", "Strike"} -- Expanded for TSB updates
+    for _, name in ipairs(possibleRemotes) do
+        local remote = ReplicatedStorage.Remotes:FindFirstChild(name)
+        if remote then
+            return remote
+        end
+    end
+    warn("M1 remote not found. Kill Aura and Auto Void Killing may fail.")
+    return ReplicatedStorage.Remotes:FindFirstChild("M1") -- Fallback
+end

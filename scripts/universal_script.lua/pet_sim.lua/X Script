@@ -1,0 +1,19 @@
+function petSimXHack()
+    local LocalPlayer = game:GetService("Players").LocalPlayer
+    local Workspace = game:GetService("Workspace")
+    local function collectGems()
+        for _, gem in pairs(Workspace:GetDescendants()) do
+            if gem.Name == "Gem" and gem:IsA("BasePart") then
+                LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(gem.Position)
+                fireclickdetector(gem:FindFirstChildOfClass("ClickDetector"))
+                wait(0.1)
+            end
+        end
+    end
+    while true do
+        collectGems()
+        wait(1)
+    end
+    print("Pet Simulator X gem farm running")
+end
+petSimXHack()

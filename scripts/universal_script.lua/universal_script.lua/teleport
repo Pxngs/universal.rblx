@@ -1,0 +1,18 @@
+local teleportBox = Instance.new("TextBox")
+teleportBox.Size = UDim2.new(0, 200, 0, 50)
+teleportBox.Position = UDim2.new(0, 130, 0, 250)
+teleportBox.Text = "Enter coords (x,y,z)"
+teleportBox.Font = Enum.Font.Gotham
+teleportBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+teleportBox.TextSize = 18
+teleportBox.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+teleportBox.Parent = mainFrame
+
+local teleportButton = createButton("Teleport", 250, function()
+    local coords = teleportBox.Text:split(",")
+    if #coords == 3 then
+        teleport(tonumber(coords[1]), tonumber(coords[2]), tonumber(coords[3]))
+    else
+        print("Invalid coordinates")
+    end
+end)

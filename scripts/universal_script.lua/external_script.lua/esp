@@ -1,0 +1,17 @@
+function enableESP()
+    local Players = game:GetService("Players")
+    local LocalPlayer = Players.LocalPlayer
+    local function addHighlight(player)
+        if player ~= LocalPlayer and player.Character then
+            local highlight = Instance.new("Highlight")
+            highlight.FillColor = Color3.fromRGB(255, 0, 0)
+            highlight.OutlineColor = Color3.fromRGB(255, 255, 255)
+            highlight.Parent = player.Character
+        end
+    end
+    for _, player in pairs(Players:GetPlayers()) do
+        addHighlight(player)
+    end
+    Players.PlayerAdded:Connect(addHighlight)
+    print("ESP activated")
+end

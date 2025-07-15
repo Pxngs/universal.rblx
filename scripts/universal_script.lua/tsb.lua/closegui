@@ -1,0 +1,12 @@
+local closeButton = Instance.new("TextButton")
+closeButton.Size = UDim2.new(0, 50, 0, 50)
+closeButton.Position = UDim2.new(1, -60, 0, 10)
+closeButton.Text = "X"
+closeButton.Font = Enum.Font.GothamBold
+closeButton.TextColor3 = Color3.fromRGB(255, 0, 0)
+closeButton.TextSize = 24
+closeButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+closeButton.Parent = tsbFrame
+closeButton.MouseButton1Click:Connect(function()
+    tsbGui.Enabled = false
+end)

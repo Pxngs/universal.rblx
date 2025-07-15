@@ -1,0 +1,9 @@
+function enableAntiBan()
+    local old; old = hookmetamethod(game, "__index", function(self, key)
+        if key == "Kick" or key == "Ban" then
+            return function() end
+        end
+        return old(self, key)
+    end)
+    print("Anti-Ban activated")
+end

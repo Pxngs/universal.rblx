@@ -1,0 +1,10 @@
+local aimbotActive = false
+local aimbotButton = createButton("Aimbot: OFF", 70, function()
+    aimbotActive = not aimbotActive
+    aimbotButton.Text = aimbotActive and "Aimbot: ON" or "Aimbot: OFF"
+    if aimbotActive then
+        enableAimbot()
+    else
+        print("Aimbot deactivated")
+    end
+end)

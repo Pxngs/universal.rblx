@@ -1,0 +1,4 @@
+local cleanupButton = createTSBButton("Cleanup", 540, function()
+    cleanup()
+    print("Script cleanup triggered")
+end)
