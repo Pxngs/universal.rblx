@@ -1,1 +1,1 @@
-loadstring(game:HttpGet("https://raw.githubusercontent.com/<Pxngs>/universal.rblx/main/scripts/external_scripts.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Pxngs/universal.rblx/main/scripts/external_script.lua"))()
