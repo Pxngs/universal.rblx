@@ -1,7 +1,7 @@
 local titleLabel = Instance.new("TextLabel")
 titleLabel.Size = UDim2.new(0, 400, 0, 50)
 titleLabel.Position = UDim2.new(0, 0, 0, 0)
-titleLabel.Text = "Ultimate Exploit 2025"
+titleLabel.Text = "universal.rblx"
 titleLabel.Font = Enum.Font.GothamBold
 titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 titleLabel.TextSize = 24
