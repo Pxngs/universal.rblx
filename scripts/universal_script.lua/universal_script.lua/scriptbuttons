@@ -14,5 +14,5 @@ local function addScriptButton(name, scriptUrl)
     end)
 end
 
-addScriptButton("Blox Fruits Auto Farm", "https://raw.githubusercontent.com/<your-github-username>/RobloxExploit2025/main/scripts/blox_fruits.lua")
-addScriptButton("Pet Simulator X", "https://raw.githubusercontent.com/<your-github-username>/RobloxExploit2025/main/scripts/pet_sim_x.lua")
+addScriptButton("Blox Fruits Auto Farm", "https://raw.githubusercontent.com/pxngs/universal.rblx/main/scripts/universal_script.lua/blox_fruits_x.lua")
+addScriptButton("Pet Simulator X", "https://raw.githubusercontent.com/pxngs/universal.rblx/main/scripts/universal_script.lua/pet_sim_x.lua")
