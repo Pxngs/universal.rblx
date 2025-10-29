@@ -1,4 +1,3 @@
-
 local services
 local success, result = pcall(function()
     return loadstring(game:HttpGet("https://raw.githubusercontent.com/Pxngs/universal.rblx/main/scripts/services.lua"))()
